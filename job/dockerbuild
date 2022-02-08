@@ -8,7 +8,8 @@ pipeline {
         stage('Create build image') {
             steps {
                 echo 'Start'
-				sh 'docker build . '
+				dir ('docker-build') 
+				{sh 'docker build -t mysite:v9 . '}
 				}
             }
         }
