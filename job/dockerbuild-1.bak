@@ -27,9 +27,9 @@ pipeline {
 		stage("docker push){
 		    steps {
 			echo "++docker push start++"
-			sh '''
+			sh """
 			docker push biggen/mysite:latest
-			'''
+			"""
 			}
 		}	
         }
