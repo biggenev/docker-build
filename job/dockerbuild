@@ -9,7 +9,7 @@ pipeline {
             steps {
                 echo 'Start'
 				dir ('.'){
-				sh 'docker build -t mysite:v9 . '
+				sh 'docker build -t mysite:v10 . '
 				}
 				}
             }
