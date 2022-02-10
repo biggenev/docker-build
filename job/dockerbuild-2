@@ -33,6 +33,7 @@ pipeline {
 		}
         stage ("deploy to k8s"){
             steps{
+			dir ('./job/')
 			sshagent(['k8s-ssh']) {
 			        sh "scp -o StrictHostKeyChecking=no deployment.yaml biggen@84.201.155.84:/home/biggen/"
 					script{
