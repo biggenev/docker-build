@@ -39,6 +39,8 @@ pipeline {
 					script{
 					    try{
 						    sh "ssh biggen@51.250.22.220 kubectl apply -f ."
+						} catch(error){
+						    sh "ssh biggen@51.250.22.220 kubectl create -f ."
 						}
 					}
 			}

@@ -35,12 +35,12 @@ pipeline {
         stage ("deploy to k8s"){
             steps{
 			sshagent(['k8s-ssh']) {
-			        sh "scp -o StrictHostKeyChecking=no deloyment.yaml biggen@51.250.22.220:/home/biggen/"
+			        sh "scp -o StrictHostKeyChecking=no deloyment.yaml biggen@84.201.140.96:/home/biggen/"
 					script{
 					    try{
-						    sh "ssh biggen@51.250.22.220 kubectl apply -f ."
+						    sh "ssh biggen@84.201.140.96 kubectl apply -f ."
 						} catch(error){
-						    sh "ssh biggen@51.250.22.220 kubectl create -f ."
+						    sh "ssh biggen@84.201.140.96 kubectl create -f ."
 						}
 					}
 			}
