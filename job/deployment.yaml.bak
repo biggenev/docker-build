@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: my-site-web
-          image: biggen/mysite:tagVersion
+          image: biggen/mysite:v4
           ports:
             - containerPort: 80
 

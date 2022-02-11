@@ -1,5 +1,8 @@
 pipeline {
     agent any
+	environment{
+	    DOCKER_TAG = getDockerTag()
+	}
 	options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
 		timestamps()
@@ -19,7 +22,7 @@ pipeline {
             steps {
                 echo 'Start'
 				dir ('.'){
-				sh 'docker build -t biggen/mysite:v4 . '
+				sh "docker build -t biggen/mysite:${DOCKER_TAG} . "
 				}
 				}
             }
@@ -27,13 +30,15 @@ pipeline {
 		    steps {
 			echo "++docker push start++"
 			sh """
-			docker push biggen/mysite:v4
+			docker push biggen/mysite:${DOCKER_TAG}
 			"""
 			}
 		}
         stage ("deploy to k8s"){
             steps{
 			dir ('./job/'){
+			sh "chmod +x tag.sh"
+			sh "./tag.sh ${DOCKER_TAG}"
 			sshagent(['k8s-ssh']) {
 			        sh "scp -o StrictHostKeyChecking=no deployment.yaml biggen@84.201.140.96:/home/biggen/"
 					script{
