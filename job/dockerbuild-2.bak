@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'Start'
 				dir ('.'){
-				sh 'docker build -t biggen/mysite:latest . '
+				sh 'docker build -t biggen/mysite:v4 . '
 				}
 				}
             }
@@ -28,7 +28,7 @@ pipeline {
 		    steps {
 			echo "++docker push start++"
 			sh """
-			docker push biggen/mysite:latest
+			docker push biggen/mysite:v4
 			"""
 			}
 		}
