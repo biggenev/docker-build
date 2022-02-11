@@ -35,7 +35,7 @@ pipeline {
 		}
         stage ("deploy to k8s"){
             steps{
-			dir ('./job/'){
+			dir ('.'){
 			sh "chmod +x tag.sh"
 			sh "./tag.sh ${DOCKER_TAG}"
 			sshagent(['k8s-ssh']) {
