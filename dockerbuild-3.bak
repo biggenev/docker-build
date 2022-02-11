@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+	environment{
+	    DOCKER_TAG = getDockerTag()
+	}
+	options {
+        timestamps()
+		}
+    stages {
+	    stage ("Docker login"){
+		    steps {
+			   echo "++docker login++"
+			   withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+			   sh """
+			   docker login -u $USERNAME -p $PASSWORD
+			   """
+			   }
+			}
+		}
+        stage('Create build image') {
+            steps {
+                echo 'Start'
+				dir ('.'){
+				sh "docker build . -t biggen/mysite:${DOCKER_TAG}"
+				}
+				}
+            }
+		stage ("docker push"){
+		    steps {
+			echo "++docker push start++"
+			sh """
+			docker push biggen/mysite:${DOCKER_TAG}
+			"""
+			}
+		}
+        stage ("deploy to k8s"){
+            steps{
+			dir ('./job/'){
+			sh "chmod +x tag.sh"
+			sh "./tag.sh ${DOCKER_TAG}"
+			sshagent(['k8s-ssh']) {
+			        sh "scp -o StrictHostKeyChecking=no node_deployment.yaml biggen@84.201.140.96:/home/biggen/"
+					script{
+					    try{
+						    sh "ssh biggen@84.201.140.96 kubectl apply -f ."
+						} catch(error){
+						    sh "ssh biggen@84.201.140.96 kubectl create -f ."
+						}
+					}
+			 }
+			}
+			}
+			}
+			
+        }
+	}	
+	def getDockerTag(){
+    def tag  = sh script: 'git rev-parse HEAD', returnStdout: true
+    return tag
+    }
+
