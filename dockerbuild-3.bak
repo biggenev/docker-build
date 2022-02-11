@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo 'Start'
 				dir ('.'){
-				sh "docker build . -t biggen/mysite:${DOCKER_TAG}"
+				sh "docker build -t biggen/mysite:${DOCKER_TAG} ."
 				}
 				}
             }
