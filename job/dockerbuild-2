@@ -1,6 +1,5 @@
 pipeline {
     agent any
-	triggers {pollSCM('* * * * *')}
 	options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
 		timestamps()
@@ -34,6 +33,7 @@ pipeline {
 		}
         stage ("deploy to k8s"){
             steps{
+			dir ('./job/'){
 			sshagent(['k8s-ssh']) {
 			        sh "scp -o StrictHostKeyChecking=no deployment.yaml biggen@84.201.140.96:/home/biggen/"
 					script{
@@ -45,7 +45,7 @@ pipeline {
 					}
 			 }
 			}
-			
+			}
 			}
 			
         }
