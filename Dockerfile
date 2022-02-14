@@ -18,5 +18,5 @@ RUN git clone https://github.com/biggenev/mysite.git \
 
 CMD ["/usr/sbin/apache2ctl","-DFOREGROUND"]
 
-EXPOSE 80 
+EXPOSE 80 443
 
