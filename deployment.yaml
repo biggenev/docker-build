@@ -61,8 +61,12 @@ spec:
   selector:
     project: site
   ports:
-    - name: app-listener
+    - name: http-listener
       protocol: TCP
       port: 80
       targetPort: 80
+    - name: https-listener
+      protocol: TCP
+      port: 443
+      targetPort: 443
   type: LoadBalancer
