@@ -20,7 +20,7 @@ spec:
         - name: my-site-web
           image: biggen/mysite:tagVersion
           ports:
-            - containerPort: 443
+            - containerPort: 80
 
 ---
 apiVersion: autoscaling/v2beta2
@@ -61,7 +61,11 @@ spec:
   selector:
     project: site
   ports:
-    - name: app-listener
+    - name: http-listener
+      protocol: TCP
+      port: 80
+      targetPort: 80
+    - name: https-listener
       protocol: TCP
       port: 443
       targetPort: 443

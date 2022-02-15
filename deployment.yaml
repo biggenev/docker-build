@@ -20,7 +20,7 @@ spec:
         - name: my-site-web
           image: biggen/mysite:tagVersion
           ports:
-            - containerPort: 80
+            - containerPort: 443
 
 ---
 apiVersion: autoscaling/v2beta2
