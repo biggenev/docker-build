@@ -12,8 +12,9 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && apt-get -y install apache2 \
     && apt-get -y install git \
 	&& apt-get -y install snapd\
-	$$ snap install --classic certbot\
-    && rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/*
+
+RUN snap install --classic certbot
 	
 COPY 000-default.conf /etc/apache2/sites-available
 
