@@ -9,8 +9,8 @@
 	#ServerName www.example.com
 
 	ServerAdmin webmaster@localhost
-	ServerName 84.252.136.34
-	Redirect / https://84.252.136.34
+	ServerName nakoskinevgeniy.ru
+	Redirect / https://nakoskinevgeniy.ru
 	DocumentRoot /var/www/html
 
 	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
@@ -34,7 +34,7 @@
 
 
 <VirtualHost *:443>
-	ServerName 84.252.136.34
+	ServerName nakoskinevgeniy.ru
 	DocumentRoot /var/www/html
 	SSLEngine on
 	SSLCertificateFile /etc/apache2/apache2.cert

@@ -17,9 +17,10 @@ RUN git clone https://github.com/biggenev/mysite.git \
     && cp -a /mysite/. /var/www/html
 
 COPY 000-default.conf /etc/apache2/sites-available
+COPY cert.* /etc/apache2
 
 RUN a2enmod ssl
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/apache2.key -out  /etc/apache2/apache2.cert -subj "/C=GB/ST=Moscow/L=Moscow/O=Global Security/OU=IT Department/CN=nakoskinevgeniy.ru"
+
 
 CMD ["/usr/sbin/apache2ctl","-DFOREGROUND"]
 
