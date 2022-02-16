@@ -15,9 +15,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 
 RUN git clone https://github.com/biggenev/mysite.git \
     && cp -a /mysite/. /var/www/html
+	&& cp -a /ssl/cert.* /etc/apache2
 
 COPY 000-default.conf /etc/apache2/sites-available
-COPY /ssl/cert.* /etc/apache2/
+
 
 RUN a2enmod ssl
 
