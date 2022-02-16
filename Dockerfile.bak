@@ -14,9 +14,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/biggenev/mysite.git \
-    && cp -a /mysite/. /var/www/html \
-	&& cp -a /ssl/cert.* /etc/apache2
-
+    && cp -a /mysite/. /var/www/html
+RUN cp -a /ssl/cert.* /etc/apache
+	
+	
 COPY 000-default.conf /etc/apache2/sites-available
 
 
