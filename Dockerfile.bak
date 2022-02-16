@@ -17,7 +17,7 @@ RUN git clone https://github.com/biggenev/mysite.git \
     && cp -a /mysite/. /var/www/html
 
 COPY 000-default.conf /etc/apache2/sites-available
-COPY cert.* /etc/apache2
+COPY cert.* /etc/apache2/
 
 RUN a2enmod ssl
 
