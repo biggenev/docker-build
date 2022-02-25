@@ -17,10 +17,10 @@ spec:
         project: site
     spec:
       containers:
-      - name: my-site-web
-        image: biggen/mysite:tagVersion
-        ports:
-        - containerPort: 443
+        - name: my-site-web
+          image: biggen/mysite:tagVersion
+          ports:
+          - containerPort: 443
 
 ---
 apiVersion: autoscaling/v2beta2
@@ -35,18 +35,18 @@ spec:
   minReplicas: 1
   maxReplicas: 5
   metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 70
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 80
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
 
 
 ---
