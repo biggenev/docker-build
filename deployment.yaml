@@ -17,7 +17,7 @@ spec:
         project: site
     spec:
       containers:
-        - name: my-site-web
+        - name: my-site-web1
           image: biggen/mysite:tagVersion
           ports:
             - containerPort: 443
@@ -32,7 +32,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: my-site
-  minReplicas: 1
+  minReplicas: 2
   maxReplicas: 5
   metrics:
   - type: Resource

@@ -20,7 +20,7 @@ spec:
         - name: my-site-web
           image: biggen/mysite:tagVersion
           ports:
-            - containerPort: 80
+            - containerPort: 443
 
 ---
 apiVersion: autoscaling/v2beta2
@@ -32,7 +32,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: my-site
-  minReplicas: 1
+  minReplicas: 2
   maxReplicas: 5
   metrics:
   - type: Resource
