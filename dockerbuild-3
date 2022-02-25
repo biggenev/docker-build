@@ -42,9 +42,9 @@ pipeline {
 			        sh "scp -o StrictHostKeyChecking=no node_deployment.yaml biggen@51.250.17.105:/home/biggen/"
 					script{
 					    try{
-						    sh "ssh biggen@51.250.17.105 kubectl apply -f node_deployment.yaml"
+						    sh "ssh biggen@51.250.17.105 kubectl apply -f ."
 						} catch(error){
-						    sh "ssh biggen@51.250.17.105 kubectl create -f node_deployment.yaml"
+						    sh "ssh biggen@51.250.17.105 kubectl create -f ."
 						}
 					}
 			 }
